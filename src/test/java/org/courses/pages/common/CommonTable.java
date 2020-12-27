@@ -61,5 +61,4 @@ public class CommonTable {
     public List<String> getColumnsText(int column) {
         return getRows().stream().map(r -> getRowCells(r).get(column).getText().trim()).collect(toList());
     }
-
 }

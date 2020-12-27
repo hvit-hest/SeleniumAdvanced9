@@ -1,4 +1,4 @@
-package org.courses.pages.countriespage;
+package org.courses.pages.countrydatapage;
 
 import org.courses.pages.common.CommonTable;
 import org.openqa.selenium.By;
@@ -7,32 +7,26 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import java.util.List;
+public class CountryDataPage {
 
-public class CountriesPage {
-
-    private String countriesPageUrl = "http://localhost/litecart/admin/?app=countries&doc=countries";
     private WebDriver driverHere;
 
 
     @FindBy(css = "h1")
     private WebElement pageHeader;
 
-
-
-    public CountriesPage(WebDriver driver) {
+    public CountryDataPage(WebDriver driver) {
         driverHere = driver;
         PageFactory.initElements(driverHere, this);
     }
 
     public void open() {
-        driverHere.navigate().to(countriesPageUrl);
         driverHere.manage().window().maximize();
     }
 
-    public CommonTable getCountriesTable() {
+    public CommonTable getTimeZonesTable() {
         return new CommonTable(driverHere, By.cssSelector("table.dataTable"),
-                By.cssSelector("tr.row"),
+                By.cssSelector("tr"),
                 By.cssSelector("td"));
     }
 }
