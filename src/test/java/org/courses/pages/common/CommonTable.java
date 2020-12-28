@@ -33,8 +33,12 @@ public class CommonTable {
         this.cellBy = cellBy;
     }
 
+    public WebElement getTable() {
+        return driverHere.findElement(tableBy);
+    }
+
     public List<WebElement> getRows() {
-       return driverHere.findElement(tableBy).findElements(recordBy);
+       return getTable().findElements(recordBy);
     }
 
     public WebElement getRow(int row) {
@@ -55,10 +59,32 @@ public class CommonTable {
 
 
     public List<WebElement> getColumn(int column) {
-        return getRows().stream().map(r -> getRowCells(r).get(column)).collect(toList());
+        return getRows().stream().map(r -> getRowCells(r).get(column)).collect(Collectors.toList());
     }
 
     public List<String> getColumnsText(int column) {
         return getRows().stream().map(r -> getRowCells(r).get(column).getText().trim()).collect(toList());
+    }
+
+    private List<WebElement> getCellsByText(String textInCell) {
+        return getTable().findElements(cellBy).stream().
+                filter(c -> c.getText().equals(textInCell)).collect(Collectors.toList());
+    }
+
+    public WebElement getCellByText(String textInCell) {
+        return getCellsByText(textInCell).get(0);
+    }
+
+    private List<WebElement> getRowsByText(String textInCell) {
+        return getRows().stream().filter(r -> r.getText().contains(textInCell)).collect(Collectors.toList());
+    }
+
+    public WebElement getRowByText(String textInCell) {
+        return getRowsByText(textInCell).get(0);
+    }
+
+    public WebElement getCellByTextFromColumn(int column, String textInCell) {
+        return getRowCells(getRowByText(textInCell)).get(column);
+
     }
 }

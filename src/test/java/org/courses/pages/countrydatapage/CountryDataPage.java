@@ -26,7 +26,7 @@ public class CountryDataPage {
 
     public CommonTable getTimeZonesTable() {
         return new CommonTable(driverHere, By.cssSelector("table.dataTable"),
-                By.cssSelector("tr"),
+                By.xpath(".//tr[not(@class='header') and .//input[not(@type='text')]]"),
                 By.cssSelector("td"));
     }
 }
