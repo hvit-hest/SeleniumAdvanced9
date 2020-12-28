@@ -14,6 +14,7 @@ import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
 import java.util.List;
 import java.util.Map;
@@ -58,6 +59,7 @@ public class CountryPageTests {
 
         /*take country with tz >0, click to open country data page, check order,return back to countries page,
                 take next country with tz >0 and click it again, etc*/
+        SoftAssert softAssertion = new SoftAssert();
         countries.entrySet().forEach(r -> {
 
             CountriesPage page = new CountriesPage(myPersonalDriver);
@@ -67,10 +69,10 @@ public class CountryPageTests {
 
             CountryDataPage timeZonesPage = new CountryDataPage(myPersonalDriver);
             List<String> timeZonesList = timeZonesPage.getTimeZonesTable().getColumnsText(2);
-            Assert.assertTrue(timeZonesList.size() == r.getValue()
+            softAssertion.assertTrue(timeZonesList.size() == r.getValue()
                     && Ordering.natural().isOrdered(timeZonesList));
         });
-
+        softAssertion.assertAll("Test did not pass");
     }
 
     @AfterClass
