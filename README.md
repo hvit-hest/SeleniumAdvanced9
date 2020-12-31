@@ -1,3 +1,3 @@
 # SeleniumHomeWork9
 
-mvn clean test -P chrome
+mvn -Dtest=CountryPageTests test -Pchrome
