@@ -38,7 +38,7 @@ public class CommonTable {
     }
 
     public List<WebElement> getRows() {
-       return getTable().findElements(recordBy);
+        return getTable().findElements(recordBy);
     }
 
     public WebElement getRow(int row) {
@@ -64,6 +64,11 @@ public class CommonTable {
 
     public List<String> getColumnsText(int column) {
         return getRows().stream().map(r -> getRowCells(r).get(column).getText().trim()).collect(toList());
+    }
+
+    public List<String> getColumnsText(int column, By locator) {
+        return getRows().stream().map(r -> getRowCells(r).get(column).
+                findElement(By.cssSelector("[selected]")).getText().trim()).collect(toList());
     }
 
     private List<WebElement> getCellsByText(String textInCell) {
