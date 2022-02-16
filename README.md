@@ -1,3 +1,3 @@
-# SeleniumHomeWork9
+# SeleniumAdvanced9
 
 mvn -Dtest=CountryPageTests test -Pchrome
